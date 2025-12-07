@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: quizdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      PORT: 3001
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/quizdb
+      JWT_SECRET: supersecret_jwt_key
+      JWT_EXPIRATION: 3600s
+      TYPEORM_SYNCHRONIZE: "true"
+      NODE_ENV: production
+    ports:
+      - "3001:3001"
+    command: ["node", "dist/main.js"]
+
+volumes:
+  db_data:
