@@ -19,7 +19,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .addBearerAuth()
     .setTitle('Quiz Engine API')
-    .setDescription('Pass you IQ test')
+    .setDescription('Pass your IQ test')
     .setVersion('1.0')
     .build();
 

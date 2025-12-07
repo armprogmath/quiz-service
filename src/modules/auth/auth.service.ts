@@ -30,14 +30,14 @@ export class AuthService {
     return { id: user.id, email: user.email, role: user.role };
   }
 
-  async login(dto: LoginDto) {
+  async login(loginDto: LoginDto) {
 
-    const user = await this.usersRepo.findOne({ where: { email: dto.email } });
+    const user = await this.usersRepo.findOne({ where: { email: loginDto.email } });
 
     if (!user) {
       throw new BadRequestException('Invalid credentials');
     }
-    const match = +await bcrypt.compare(dto.password, user.password);
+    const match = +await bcrypt.compare(loginDto.password, user.password);
 
     if (!match) {
       throw new BadRequestException('Invalid credentials')
