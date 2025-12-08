@@ -5,7 +5,7 @@ import { AuthModule } from '@modules/auth/auth.module';
 import { UsersModule } from '@modules/users/users.module';
 import { QuizModule } from '@modules/quiz/quiz.module';
 import { ResultsModule } from '@modules/results/results.module';
-import { UserEntity } from './modules/users/user.entity';
+import { UserEntity } from '@modules/users/user.entity';
 import { QuestionEntity } from '@modules/quiz/entities/question.entity';
 import { QuizEntity } from '@modules/quiz/entities/quiz.entity';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
@@ -15,7 +15,8 @@ import { ResultEntity } from '@modules/results/entities/result.entity';
 import { AttemptEntity } from '@modules/results/entities/attempt.entity';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from "path";
-import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { HttpExceptionFilter } from '@common/filters/http-exception.filter';
+import {RabbitMQGlobalModule} from '@app/rabbitmq.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
     TypeOrmModule.forFeature([UserEntity, QuizEntity, QuestionEntity, ResultEntity, AttemptEntity]),
 
+    RabbitMQGlobalModule,
     AuthModule,
     UsersModule,
     QuizModule,

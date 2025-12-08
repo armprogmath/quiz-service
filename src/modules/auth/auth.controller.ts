@@ -8,12 +8,18 @@ export class AuthController {
   constructor(private readonly auth: AuthService) {}
 
   @Post('register')
-  register(@Body() regiserDto: RegisterDto) {
-    return this.auth.register(regiserDto);
+  register(@Body() registerDto: RegisterDto) {
+    return this.auth.register(registerDto);
   }
 
   @Post('login')
   login(@Body() loginDto: LoginDto) {
     return this.auth.login(loginDto);
+  }
+
+  @Post('send-data')
+  sendData(@Body() dataDto: any) {
+    console.log("test")
+    return this.auth.sendData(dataDto);
   }
 }
