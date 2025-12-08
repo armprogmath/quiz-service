@@ -19,7 +19,7 @@ export class AuthController {
 
   @Post('send-data')
   sendData(@Body() dataDto: any) {
-    console.log("test")
+    console.log(dataDto)
     return this.auth.sendData(dataDto);
   }
 }
