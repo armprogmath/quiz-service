@@ -19,7 +19,7 @@ Features:
 
 ## Database
 ```bash 
-# Use database url in .env files or see docker section 
+# Use PostgreSQL database url in .env files or see docker section 
 $ DATABASE_URL=postgresql://postgres:YOUR-PASSWORD@HOST:PORT/YOUR_DATABASE_NAME
 ```
 
@@ -65,4 +65,4 @@ docker-compose up --build
 
 - LinkedIn - [@linkedIn](https://am.linkedin.com/company/primeitwebdevelopment)
 
-- github - [github]()
+- github - [github](https://github.com/armprogmath)
