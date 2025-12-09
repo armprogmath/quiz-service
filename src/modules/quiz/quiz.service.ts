@@ -18,16 +18,12 @@ export class QuizService {
     @InjectRepository(AttemptEntity) private attemptsRepo: Repository<AttemptEntity>,
   ) {}
 
-
-
   async create(createQuizDto: CreateQuizDto) {
 
     const quiz = this.quizRepo.create(createQuizDto);
 
     return this.quizRepo.save(quiz);
   }
-
-
 
   async update(id: number, createQuizDto: Partial<CreateQuizDto>) {
 
@@ -40,8 +36,6 @@ export class QuizService {
     return this.quizRepo.save(quiz);
   }
 
-
-
   async remove(id: number) {
 
     const quiz = await this.quizRepo.findOne({ where: { id } });
@@ -52,8 +46,6 @@ export class QuizService {
 
     return this.quizRepo.remove(quiz);
   }
-
-
 
   async addQuestion(quizId: number, createQuestionDto: CreateQuestionDto) {
 
@@ -68,10 +60,8 @@ export class QuizService {
     return this.qRepo.save(question);
   }
 
-
-
   async list() {
-    return this.quizRepo.find({ relations: ['questions'] });
+    return this.quizRepo.find();
   }
 
   async start(quizId: number, userId?: number) {
