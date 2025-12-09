@@ -122,7 +122,7 @@ export class QuizService {
 
       if (correct) {
         score++
-      };
+      }
 
       answersMap.push({ questionId: q.id, correctIndex: q.correct_option_index, userAnswer: userAns, correct });
     }
