@@ -40,6 +40,9 @@ $ npm run start:prod
 
 # Build production mode:
 $ npm run start:build-prod
+
+# Run test watch mode
+$ npm run test:watch
 ```
 
 # Docker

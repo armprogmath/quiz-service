@@ -8,11 +8,18 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2019",
+    "strict": true,
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".",
     "incremental": true,
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "types": ["node", "jest"],
+
     "paths": {
       "@app/*": ["src/*"],
       "@modules/*": ["src/modules/*"],
