@@ -103,7 +103,7 @@ export class QuizController {
   @ApiOperation({ summary: 'Get list of all quizzes' })
   @ApiResponse({
     status: 200,
-    description: 'List of quizzes with questions',
+    description: 'List of quizzes',
     schema: {
       example: {
         data: [
@@ -114,16 +114,6 @@ export class QuizController {
             title: 'General Knowledge',
             description: 'A short description',
             timeLimit: 60,
-            questions: [
-              {
-                id: 1,
-                createdAt: '2025-12-08T12:14:05.006Z',
-                updatedAt: '2025-12-08T12:14:05.006Z',
-                question_text: 'What is 2+2?',
-                options: ['1', '3', '4'],
-                correct_option_index: 2,
-              }
-            ],
           },
         ]
       }
