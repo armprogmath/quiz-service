@@ -74,8 +74,6 @@ export class QuizService {
     return this.quizRepo.find({ relations: ['questions'] });
   }
 
-
-
   async start(quizId: number, userId?: number) {
 
     const quiz = await this.quizRepo.findOne({ where: { id: quizId }, relations: ['questions'] });
@@ -91,8 +89,6 @@ export class QuizService {
 
     return { quizId: quiz.id, title: quiz.title, timeLimit: quiz.timeLimit, attemptId: attempt.id, questions };
   }
-
-
 
   async submit(quizId: number, attemptId: number, userId: number, answers: number[]) {
 

@@ -18,16 +18,50 @@ async function bootstrap() {
 
   const configService: ConfigService = app.get(ConfigService);
 
-  const config = new DocumentBuilder()
-    .addBearerAuth()
-    .setTitle('Quiz Engine API')
-    .setDescription('Pass your IQ test')
-    .setVersion('1.0')
-    .build();
+  // const config = new DocumentBuilder()
+  //   .addBearerAuth()
+  //   .setTitle('Quiz Engine API')
+  //   .setDescription('Pass your IQ test')
+  //   .setVersion('1.0')
+  //   .build();
+  //
+  // const document = SwaggerModule.createDocument(app, config);
+  // SwaggerModule.setup('api', app, document);
+  // SwaggerModule.setup('docs', app, document);
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
-  SwaggerModule.setup('docs', app, document);
+
+  // SWAGGER CONFIG STARTS
+  const PORT = configService.get('PORT', 3003);
+
+  const swaggerConfig = new DocumentBuilder()
+      .setTitle('Quiz Engine API')
+      .setDescription('IQ Test Quiz Application')
+      .setVersion('1.0.0')
+      .addBearerAuth(
+          {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+            in: 'header',
+          },
+          'access-token',
+      )
+      .addServer(`http://localhost:${PORT}/api`, 'Local Server')
+      .build();
+
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
+
+  SwaggerModule.setup('docs', app, document, {
+    swaggerOptions: {
+      persistAuthorization: true,
+    },
+    customSiteTitle: 'Quiz Engine API Docs',
+    customCss: `
+      .swagger-ui .topbar { display: none }
+    `,
+  });
+
+  // SWAGGER CONFIG ENDS
 
   app.setGlobalPrefix('api');
 
