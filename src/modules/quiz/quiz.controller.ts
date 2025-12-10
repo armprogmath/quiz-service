@@ -1,5 +1,4 @@
 import { Controller, Post, Body, UseGuards, Param, Get, Delete, Put, Req } from '@nestjs/common';
-import { JwtAuthGuard } from '@common/guards/jwt-auth.guard';
 import { Roles } from '@common/decorators/roles.decorator';
 import { RolesGuard } from '@common/guards/roles.guard';
 import { QuizService } from './quiz.service';
@@ -7,6 +6,7 @@ import { CreateQuizDto } from './dto/create-quiz.dto';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UserRoleEnum } from '@common/enums/user.role.enum';
 import {ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiResponse} from "@nestjs/swagger";
+import {JwtAuthGuard} from "@common/guards/jwt-auth.guard";
 
 @Controller('quizzes')
 export class QuizController {

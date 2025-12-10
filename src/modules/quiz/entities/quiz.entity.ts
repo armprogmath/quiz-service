@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { QuestionEntity } from './question.entity';
-import { BaseEntity } from '@app/common/entities/base.entity';
+import { BaseEntity } from '@common/entities/base.entity';
 
 @Entity('quizzes')
 export class QuizEntity extends BaseEntity {

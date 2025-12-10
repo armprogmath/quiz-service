@@ -17,6 +17,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from "path";
 import { HttpExceptionFilter } from '@common/filters/http-exception.filter';
 import {RabbitMQGlobalModule} from '@app/rabbitmq.module';
+import { TestModule } from './test/test.module';
 
 @Module({
   imports: [
@@ -55,6 +56,7 @@ import {RabbitMQGlobalModule} from '@app/rabbitmq.module';
     UsersModule,
     QuizModule,
     ResultsModule,
+    TestModule,
   ],
   providers:[
     {
