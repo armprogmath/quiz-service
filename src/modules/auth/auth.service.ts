@@ -57,7 +57,7 @@ export class AuthService {
   @RabbitPublish(Topics.EventQuizCalcTopic, SendQuizCalculationRoutingKey.QuizCalculationSentRK)
   async sendData(dataDto: any){
     const data = JSON.stringify(dataDto)
-    console.log(data)
+    //console.log(data)
     return JSON.stringify(data, null, 2)
   }
 }
