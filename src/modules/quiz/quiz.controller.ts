@@ -100,6 +100,8 @@ export class QuizController {
   }
 
   @Get()
+  @Roles(UserRoleEnum.Admin, UserRoleEnum.User)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiOperation({ summary: 'Get list of all quizzes' })
   @ApiResponse({
     status: 200,
@@ -126,6 +128,8 @@ export class QuizController {
   }
 
   @Get(':id/start')
+  @Roles(UserRoleEnum.Admin, UserRoleEnum.User)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiBearerAuth('access-token')
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Start a quiz attempt' })
