@@ -1,7 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { UserRoleEnum } from '@app/common/enums/user.role.enum';
-import { BaseEntity } from '@app/common/entities/base.entity';
+import { Entity, Column, OneToMany } from 'typeorm';
+import { UserRoleEnum } from '@common/enums/user.role.enum';
 import { ResultEntity } from '../results/entities/result.entity';
+import {BaseEntity} from "@common/entities/base.entity";
 
 @Entity('users')
 export class UserEntity extends BaseEntity {

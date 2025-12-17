@@ -18,10 +18,10 @@ const mockRepo = () => ({
 
 describe('QuizService', () => {
     let service: QuizService;
-    let quizRepo;
-    let qRepo;
-    let resultsRepo;
-    let attemptsRepo;
+    let quizRepo: ReturnType<typeof mockRepo>;
+    let qRepo: ReturnType<typeof mockRepo>;
+    let resultsRepo: ReturnType<typeof mockRepo>;
+    let attemptsRepo: ReturnType<typeof mockRepo>;
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
@@ -51,7 +51,7 @@ describe('QuizService', () => {
         quizRepo.create.mockReturnValue(dto);
         quizRepo.save.mockResolvedValue({ id: 1, ...dto });
 
-        const result = await service.create(dto);
+        const result = await service.create(dto as any);
 
         expect(result).toEqual({ id: 1, title: 'Test Quiz' });
         expect(quizRepo.create).toHaveBeenCalledWith(dto);
@@ -66,7 +66,7 @@ describe('QuizService', () => {
         quizRepo.findOne.mockResolvedValue(quiz);
         quizRepo.save.mockResolvedValue({ id: 1, title: 'New' });
 
-        const result = await service.update(1, { title: 'New' });
+        const result = await service.update(1, { title: 'New' } as any);
 
         expect(result).toEqual({ id: 1, title: 'New' });
     });
@@ -74,7 +74,7 @@ describe('QuizService', () => {
     it('should throw NotFoundException when updating missing quiz', async () => {
         quizRepo.findOne.mockResolvedValue(null);
 
-        await expect(service.update(1, {})).rejects.toThrow(NotFoundException);
+        await expect(service.update(1, {} as any)).rejects.toThrow(NotFoundException);
     });
 
     // -------------------------------------------------------------
@@ -103,12 +103,16 @@ describe('QuizService', () => {
         const quiz = { id: 1 };
         quizRepo.findOne.mockResolvedValue(quiz);
 
-        const dto = { question_text: 'Q1', options: ['a', 'b'], correct_option_index: 0 };
+        const dto = {
+            question_text: 'Q1',
+            options: ['a', 'b'],
+            correct_option_index: 0,
+        };
 
         qRepo.create.mockReturnValue({ ...dto, quiz });
         qRepo.save.mockResolvedValue({ id: 10, ...dto, quiz });
 
-        const result = await service.addQuestion(1, dto);
+        const result = await service.addQuestion(1, dto as any);
 
         expect(result).toEqual({ id: 10, ...dto, quiz });
     });
@@ -116,7 +120,9 @@ describe('QuizService', () => {
     it('should throw if quiz missing when adding question', async () => {
         quizRepo.findOne.mockResolvedValue(null);
 
-        await expect(service.addQuestion(1, {} as any)).rejects.toThrow(NotFoundException);
+        await expect(service.addQuestion(1, {} as any)).rejects.toThrow(
+            NotFoundException,
+        );
     });
 
     // -------------------------------------------------------------
@@ -188,7 +194,9 @@ describe('QuizService', () => {
     it('should throw if quiz not found on submit', async () => {
         quizRepo.findOne.mockResolvedValue(null);
 
-        await expect(service.submit(1, 11, 7, [])).rejects.toThrow(NotFoundException);
+        await expect(service.submit(1, 11, 7, [])).rejects.toThrow(
+            NotFoundException,
+        );
     });
 
     it('should throw if attempt not found on submit', async () => {
@@ -196,7 +204,9 @@ describe('QuizService', () => {
 
         attemptsRepo.findOne.mockResolvedValue(null);
 
-        await expect(service.submit(1, 11, 7, [])).rejects.toThrow(BadRequestException);
+        await expect(service.submit(1, 11, 7, [])).rejects.toThrow(
+            BadRequestException,
+        );
     });
 
     it('should throw if time limit exceeded', async () => {
