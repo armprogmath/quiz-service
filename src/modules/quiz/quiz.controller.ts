@@ -7,87 +7,35 @@ import { CreateQuestionDto } from './dto/create-question.dto';
 import { UserRoleEnum } from '@common/enums/user.role.enum';
 import {ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiResponse} from "@nestjs/swagger";
 import {JwtAuthGuard} from "@common/guards/jwt-auth.guard";
+import {ApiCreate} from "@common/decorators/swagger-decorators/swagger-decorators/create.decorator";
+import {CreateQuizResponseDto} from "@modules/quiz/dto/create-quiz.response.dto";
+import {ApiUpdate} from "@common/decorators/swagger-decorators/swagger-decorators/update.decorator";
+import {ApiDelete} from "@common/decorators/swagger-decorators/swagger-decorators/delete.decorator";
 
 @Controller('quizzes')
 export class QuizController {
   constructor(private readonly service: QuizService) {}
 
   @Post()
-  @ApiBearerAuth('access-token')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRoleEnum.Admin)
-  @ApiOperation({ summary: 'Create a new quiz' })
-  @ApiBody({
-    type: CreateQuizDto,
-    description: 'Data required to create a new quiz',
-  })
-  @ApiResponse({
-    status: 201,
-    description: 'Quiz successfully created',
-    schema: {
-      example: {
-        id: 1,
-        title: 'General Knowledge',
-        description: 'A short description',
-        timeLimit: 60,
-        createdAt: '2025-12-08T12:00:00.000Z',
-        updatedAt: '2025-12-08T12:00:00.000Z',
-      },
-    },
-  })
-  @ApiResponse({ status: 400, description: 'Validation error' })
-  @ApiResponse({ status: 401, description: 'Unauthorized - invalid token' })
-  @ApiResponse({ status: 403, description: 'Forbidden - insufficient role' })
+  @ApiCreate('quiz', CreateQuizDto, CreateQuizResponseDto)
   create(@Body() createQuizDto: CreateQuizDto) {
     return this.service.create(createQuizDto);
   }
 
   @Put(':id')
-  @ApiBearerAuth('access-token')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRoleEnum.Admin)
-  @ApiOperation({ summary: 'Update quiz by ID' })
-  @ApiParam({ name: 'id', required: true, type: Number, example: 1 })
-  @ApiBody({
-    type: CreateQuizDto,
-    description: 'Fields to update (only include fields you want to change)',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Quiz updated successfully',
-    type: CreateQuizDto,
-  })
-  @ApiResponse({ status: 400, description: 'Validation error' })
-  @ApiResponse({ status: 401, description: 'Unauthorized - invalid or missing token' })
-  @ApiResponse({ status: 403, description: 'Forbidden - insufficient role' })
-  @ApiResponse({ status: 404, description: 'Quiz not found' })
+  @ApiUpdate('quiz', CreateQuizDto, CreateQuizResponseDto)
   update(@Param('id') id: number, @Body() createQuizDto: Partial<CreateQuizDto>) {
     return this.service.update(+id, createQuizDto);
   }
 
   @Delete(':id')
-  @ApiBearerAuth('access-token')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRoleEnum.Admin)
-  @ApiOperation({ summary: 'Delete a quiz by ID' }) // Description in Swagger
-  @ApiParam({ name: 'id', type: Number, required: true, example: 1 })
-  @ApiResponse({
-    status: 200,
-    description: 'Quiz deleted successfully',
-    schema: {
-      example: {
-        id: 1,
-        title: 'General Knowledge',
-        description: 'A short description',
-        timeLimit: 60,
-        createdAt: '2025-12-08T12:00:00.000Z',
-        updatedAt: '2025-12-08T12:00:00.000Z',
-      },
-    },
-  })
-  @ApiResponse({ status: 401, description: 'Unauthorized - invalid token' })
-  @ApiResponse({ status: 403, description: 'Forbidden - insufficient role' })
-  @ApiResponse({ status: 404, description: 'Quiz not found' })
+  @ApiDelete('quiz', CreateQuizResponseDto)
   remove(@Param('id') id: number) {
     return this.service.remove(+id);
   }
