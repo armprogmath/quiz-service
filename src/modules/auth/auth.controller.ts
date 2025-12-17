@@ -55,9 +55,9 @@ export class AuthController {
     return this.auth.login(loginDto);
   }
 
+
   @Post('send-data')
   sendData(@Body() dataDto: any) {
-    console.log(dataDto)
     return this.auth.sendData(dataDto);
   }
 }

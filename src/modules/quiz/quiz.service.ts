@@ -29,8 +29,9 @@ export class QuizService {
 
     const quiz = await this.quizRepo.findOne({ where: { id } });
 
-    if (!quiz) throw new NotFoundException('Quiz not found');
-
+    if (!quiz) {
+      throw new NotFoundException('Quiz not found');
+    }
     Object.assign(quiz, createQuizDto);
 
     return this.quizRepo.save(quiz);
@@ -43,7 +44,6 @@ export class QuizService {
     if (!quiz) {
       throw new NotFoundException('Quiz not found');
     }
-
     return this.quizRepo.remove(quiz);
   }
 
@@ -54,7 +54,6 @@ export class QuizService {
     if (!quiz) {
       throw new NotFoundException('Quiz not found');
     }
-
     const question = this.qRepo.create({ ...createQuestionDto, quiz });
 
     return this.qRepo.save(question);
@@ -72,7 +71,6 @@ export class QuizService {
       throw new NotFoundException('Quiz not found');
     }
     const questions = quiz.questions.map((q) => ({ id: q.id, question_text: q.question_text, options: q.options }));
-
     const attempt = this.attemptsRepo.create({ startedAt: new Date(), quiz, user: userId ? ({ id: userId } as any) : null });
 
     await this.attemptsRepo.save(attempt);
@@ -92,7 +90,7 @@ export class QuizService {
     if (!attempt) {
       throw new BadRequestException('Invalid attempt');
     }
-
+    console.log("AAA")
     if (quiz.timeLimit && attempt.startedAt) {
       const spent = (Date.now() - attempt.startedAt.getTime()) / 1000;
       if (spent > quiz.timeLimit) {
@@ -105,9 +103,7 @@ export class QuizService {
 
     for (let i = 0; i < quiz.questions.length; i++) {
       const q = quiz.questions[i];
-
       const userAns = answers[i];
-
       const correct = q.correct_option_index === userAns;
 
       if (correct) {
@@ -122,7 +118,6 @@ export class QuizService {
     attempt.finishedAt = new Date();
 
     await this.attemptsRepo.save(attempt);
-
     await this.resultsRepo.save(result);
 
     return { score: `${score}/${quiz.questions.length}`, details: answersMap };

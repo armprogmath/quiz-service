@@ -7,9 +7,9 @@ import { JwtService } from '@nestjs/jwt';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import {SendQuizCalculationRoutingKey, Topics} from "@common/event-constants/constants";
-import {RabbitRPCPublish} from "@common/decorators/rpc.publisher.decorator";
 import {AmqpConnection} from "@golevelup/nestjs-rabbitmq";
 import {RabbitPublish} from "@common/decorators/rmq.publisher.decorator";
+import {RabbitRPCPublish} from "@common/decorators/rpc.publisher.decorator";
 
 @Injectable()
 export class AuthService {
@@ -47,17 +47,23 @@ export class AuthService {
       throw new BadRequestException('Invalid credentials')
     }
 
-    const payload = { sub: user.id, email: user.email, role: user.role };
+    const payload = { sub: user.id, email: user.email, role: user.role};
 
     const token = this.jwt.sign(payload);
 
     return { access_token: token };
   }
 
-  @RabbitPublish(Topics.EventQuizCalcTopic, SendQuizCalculationRoutingKey.QuizCalculationSentRK)
+  @RabbitRPCPublish(Topics.EventQuizCalcTopic, SendQuizCalculationRoutingKey.QuizCalculationSentRK)
   async sendData(dataDto: any){
     const data = JSON.stringify(dataDto)
-    //console.log(data)
+    console.log("The data has been sent successfully", data);
     return JSON.stringify(data, null, 2)
   }
+  //
+  // async sendData(dataDto: any){
+  //   const result = await this.sendDataProducer(dataDto)
+  //   console.log("Result: ", result)
+  //   return result
+  // }
 }

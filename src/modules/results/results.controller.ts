@@ -2,6 +2,9 @@ import { Controller, Get, UseGuards, Req } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { ResultsService } from './results.service';
 import {ApiBearerAuth, ApiOperation, ApiResponse} from "@nestjs/swagger";
+import {Roles} from "@common/decorators/roles.decorator";
+import {UserRoleEnum} from "@common/enums/user.role.enum";
+import {RolesGuard} from "@common/guards/roles.guard";
 
 @Controller('results')
 export class ResultsController {
@@ -9,7 +12,8 @@ export class ResultsController {
 
   @Get('me')
   @ApiBearerAuth('access-token')
-  @UseGuards(JwtAuthGuard)
+  @Roles(UserRoleEnum.Admin, UserRoleEnum.User)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiOperation({ summary: 'Get quiz attempts history of the logged-in user' })
   @ApiResponse({
     status: 200,
