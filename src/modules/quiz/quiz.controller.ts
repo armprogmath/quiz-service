@@ -11,6 +11,7 @@ import {ApiCreate} from "@common/decorators/swagger-decorators/swagger-decorator
 import {CreateQuizResponseDto} from "@modules/quiz/dto/create-quiz.response.dto";
 import {ApiUpdate} from "@common/decorators/swagger-decorators/swagger-decorators/update.decorator";
 import {ApiDelete} from "@common/decorators/swagger-decorators/swagger-decorators/delete.decorator";
+import {CreateQuestionResponseDto} from "@modules/quiz/dto/create-question.response.dto";
 
 @Controller('quizzes')
 export class QuizController {
@@ -43,6 +44,7 @@ export class QuizController {
   @Post(':id/questions')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRoleEnum.Admin)
+  @ApiCreate('question', CreateQuestionDto, CreateQuestionResponseDto, true, 'quiz')
   addQuestion(@Param('id') id: number, @Body() createQuizDto: CreateQuestionDto) {
     return this.service.addQuestion(+id, createQuizDto);
   }
