@@ -69,6 +69,6 @@ docker-compose up --build
 
 - Author - [Armen Arakelyan ](https://www.linkedin.com/in/armen-arakelyan)
 
-- LinkedIn - [@linkedIn](https://am.linkedin.com/company/primeitwebdevelopment)
+- LinkedIn - [@linkedIn](https://www.linkedin.com/in/armen-arakelyan)
 
 - github - [github](https://github.com/armprogmath)
