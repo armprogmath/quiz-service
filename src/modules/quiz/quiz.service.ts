@@ -21,7 +21,7 @@ export class QuizService {
   async create(createQuizDto: CreateQuizDto) {
 
     const quiz = this.quizRepo.create(createQuizDto);
-
+    //console.log(quiz)
     return this.quizRepo.save(quiz);
   }
 
