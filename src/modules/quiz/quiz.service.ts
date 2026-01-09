@@ -21,7 +21,6 @@ export class QuizService {
   async create(createQuizDto: CreateQuizDto) {
 
     const quiz = this.quizRepo.create(createQuizDto);
-    //console.log(quiz)
     return this.quizRepo.save(quiz);
   }
 
@@ -33,13 +32,14 @@ export class QuizService {
       throw new NotFoundException('Quiz not found');
     }
     Object.assign(quiz, createQuizDto);
-
+    //console.log(quiz)
     return this.quizRepo.save(quiz);
   }
 
   async remove(id: number) {
 
     const quiz = await this.quizRepo.findOne({ where: { id } });
+    //console.log(quiz)
     
     if (!quiz) {
       throw new NotFoundException('Quiz not found');
