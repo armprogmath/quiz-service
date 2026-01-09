@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { AttemptEntity } from './attempt.entity';
-import { BaseEntity } from '@app/common/entities/base.entity';
-import { UserEntity } from '@app/modules/users/user.entity';
-import { QuizEntity } from '@app/modules/quiz/entities/quiz.entity';
+import { BaseEntity } from '@common/entities/base.entity';
+import { UserEntity } from '../../users/user.entity';
+import { QuizEntity } from '../../quiz/entities/quiz.entity';
 
 @Entity('results')
 export class ResultEntity extends BaseEntity {

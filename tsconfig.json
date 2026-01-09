@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
@@ -7,20 +6,21 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es2019",
+    "target": "es2017",
     "sourceMap": true,
-    "outDir": "dist",
-    "baseUrl": ".",
-    "incremental": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "strict": false,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "paths": {
       "@app/*": ["src/*"],
-      "@modules/*": ["src/modules/*"],
-      "@common/*":  ["src/common/*"]
+      "@common/*": ["src/common/*"],
+      "@modules/*": ["src/modules/*"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "test", "**/*.spec.ts"]
 }

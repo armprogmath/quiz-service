@@ -47,6 +47,7 @@ async function bootstrap() {
           'access-token',
       )
       .addServer(`http://localhost:${PORT}/api`, 'Local Server')
+      .addServer(`http://localhost:${PORT}/api`, 'Production Server')
       .build();
 
   const document = SwaggerModule.createDocument(app, swaggerConfig);
