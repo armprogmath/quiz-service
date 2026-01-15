@@ -62,7 +62,6 @@ async function bootstrap() {
     `,
   });
 
-  // SWAGGER CONFIG ENDS
 
   app.setGlobalPrefix('api');
 
