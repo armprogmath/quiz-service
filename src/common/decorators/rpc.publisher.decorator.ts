@@ -13,14 +13,20 @@ export function RabbitRPCPublish(exchange: string, routingKey: string, timeout =
 
       const payload = await originalMethod.apply(this, args);
 
-      const response = await amqpConnection.request({
-        exchange,
-        routingKey,
-        payload,
-        timeout,
-      });
-
-      return response;
+      // const response = await amqpConnection.request({
+      //   exchange,
+      //   routingKey,
+      //   payload,
+      //   timeout,
+      // });
+      //
+      // return response;
+        return amqpConnection.request({
+            exchange,
+            routingKey,
+            payload,
+            timeout,
+        });
     };
 
     return descriptor;
