@@ -30,7 +30,7 @@ async function bootstrap() {
   // SwaggerModule.setup('docs', app, document);
 
 
-  // SWAGGER CONFIG STARTS
+
   const PORT = configService.get('PORT', 3003);
 
   const swaggerConfig = new DocumentBuilder()
