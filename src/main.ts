@@ -18,7 +18,7 @@ async function bootstrap() {
 
   const configService: ConfigService = app.get(ConfigService);
 
-  // const config = new DocumentBuilder()
+  //// const config = new DocumentBuilder()
   //   .addBearerAuth()
   //   .setTitle('Quiz Engine API')
   //   .setDescription('Pass your IQ test')
@@ -30,7 +30,7 @@ async function bootstrap() {
   // SwaggerModule.setup('docs', app, document);
 
 
-  // SWAGGER CONFIG STARTS
+
   const PORT = configService.get('PORT', 3003);
 
   const swaggerConfig = new DocumentBuilder()
