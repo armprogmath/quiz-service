@@ -18,7 +18,7 @@ async function bootstrap() {
 
   const configService: ConfigService = app.get(ConfigService);
 
-  //// const config = new DocumentBuilder()
+  // const config = new DocumentBuilder()
   //   .addBearerAuth()
   //   .setTitle('Quiz Engine API')
   //   .setDescription('Pass your IQ test')
