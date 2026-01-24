@@ -5,7 +5,7 @@ export function RabbitPublish(exchange: string, routingKey: string) {
     const originalMethod = descriptor.value;
 
     descriptor.value = async function (...args: any[]) {
-      //// Access `AmqpConnection` from the current instance (i.e., 'this') context
+      // Access `AmqpConnection` from the current instance (i.e., 'this') context
       const amqpConnection: AmqpConnection = this.amqpConnection;
 
       if (!amqpConnection) {
