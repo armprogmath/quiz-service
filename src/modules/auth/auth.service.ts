@@ -57,7 +57,7 @@ export class AuthService {
   @RabbitRPCPublish(Topics.EventQuizCalcTopic, SendQuizCalculationRoutingKey.QuizCalculationSentRK)
   async sendData(dataDto: any){
     const data = JSON.stringify(dataDto)
-    console.log("The data has been sent successfully", data);
+    //console.log("The data has been sent successfully", data);
     return JSON.stringify(data, null, 2)
   }
   //
