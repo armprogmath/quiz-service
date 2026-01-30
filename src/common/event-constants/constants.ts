@@ -1,12 +1,12 @@
 export enum ExchangeType {
     Topic = "topic",
-    Fanout = "fanout",
-    Direct = "direct"
+    // Fanout = "fanout",
+    // Direct = "direct"
 }
 
 export enum Topics {
     EventQuizCalcTopic = "event.quiz.calc.topic",
-    //CommandQuizCalcTopic = "command.quiz.calc.topic",
+    CommandQuizCalcTopic = "command.quiz.calc.topic",
 }
 
 export enum SendQuizCalculationRoutingKey {
@@ -15,9 +15,9 @@ export enum SendQuizCalculationRoutingKey {
 }
 
 export enum EventNames {
-    EventCalculateResultSentRK= "event.calculation.result.sent",
+    //EventCalculateResultSentRK= "event.calculation.result.sent",
 }
 
 export enum Consumers {
-    //mmandCalculationConsumer = "command.calculation.consumer",
+    //CommandCalculationConsumer = "command.calculation.consumer",
 }
