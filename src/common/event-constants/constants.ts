@@ -1,6 +1,6 @@
 export enum ExchangeType {
     Topic = "topic",
-    Fanout = "fanout",
+    //Fanout = "fanout",
     //Direct = "direct"
 }
 
