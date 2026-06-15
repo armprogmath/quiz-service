@@ -6,7 +6,7 @@ export enum ExchangeType {
 
 export enum Topics {
     EventQuizCalcTopic = "event.quiz.calc.topic",
-    CommandQuizCalcTopic = "command.quiz.calc.topic",
+    //CommandQuizCalcTopic = "command.quiz.calc.topic",
 }
 
 export enum SendQuizCalculationRoutingKey {
