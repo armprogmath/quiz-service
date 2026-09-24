@@ -40,10 +40,10 @@ export enum SendQuizCalculationRoutingKey {
 }
 
 export enum EventNames {
-   EventCalculateResultSentRK= "event.calculation.result.sent",
+   //EventCalculateResultSentRK= "event.calculation.result.sent",
 }
 
 export enum Consumers {
-   CommandCalculationConsumer = "command.calculation.consumer",
+   //CommandCalculationConsumer = "command.calculation.consumer",
 }
 
