@@ -94,6 +94,10 @@ export enum EventNames {
 }
 
 export enum Consumers {
-   //CommandCalculationConsumer = "command.calculation.consumer",
+   CommandCalculationConsumer = "command.calculation.consumer",
 }
+
+
+
+
 
